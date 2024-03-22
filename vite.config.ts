@@ -4,6 +4,9 @@ import { viteMockServe } from 'vite-plugin-mock'
 import * as defaultSettings from './src/settings'
 import { resolve } from 'path'
 import vue from '@vitejs/plugin-vue'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 
 const title = defaultSettings.default.title
 
@@ -30,6 +33,18 @@ export default defineConfig((config: ConfigEnv): UserConfig => {
     },
     plugins: [
       vue(),
+      AutoImport({
+        // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
+        imports: ['vue', '@vueuse/core', 'pinia', 'vue-router'],
+        resolvers: [ElementPlusResolver()],
+        vueTemplate: true,
+        dts: false,
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()],
+        dirs: ["src/components", "src/**/components"],
+        dts: false,
+      }),
       createHtmlPlugin({
         inject: {
           data: {
@@ -40,7 +55,7 @@ export default defineConfig((config: ConfigEnv): UserConfig => {
       viteMockServe({
         mockPath: './mock', // mock文件存放的位置
         enable: true, // 是否启用 mock 功能
-        logger: true, // 是否在控制台显示请求日志
+        logger: true // 是否在控制台显示请求日志
       })
     ],
     build: {

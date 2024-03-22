@@ -1,14 +1,16 @@
 <template>
   <div class="login">
-    <el-button type="success" @click="handleLogin">登录</el-button>
+    <el-button type="warning" @click="handleLogin">登录</el-button>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { login } from '@/api/user'
 import { LoginData } from '@/api/user/type'
+import { useUserStore } from '@/store'
 defineOptions({ name: 'login' })
+
+const userStore = useUserStore()
 
 // 登录
 const loginData = ref<LoginData>({
@@ -18,8 +20,7 @@ const loginData = ref<LoginData>({
 
 const handleLogin = async () => {
   try {
-    const res = await login(loginData.value)
-    console.log(res, 111)
+    await userStore.login(loginData.value)
   } catch (error) {}
 }
 </script>

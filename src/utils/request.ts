@@ -1,4 +1,5 @@
 import axios, { InternalAxiosRequestConfig, AxiosResponse } from 'axios'
+import { getToken } from '@/utils/auth'
 
 const service = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API,
@@ -7,7 +8,7 @@ const service = axios.create({
 
 service.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    console.log(config)
+    config.headers['X-Token'] = getToken()
     return config
   },
   (error: any) => {
@@ -18,7 +19,10 @@ service.interceptors.request.use(
 
 service.interceptors.response.use(
   (response: AxiosResponse) => {
-    console.log(response)
+    const { code } = response.data
+    if (code === 200) {
+      return response.data
+    }
     return response
   },
   (error: any) => {
