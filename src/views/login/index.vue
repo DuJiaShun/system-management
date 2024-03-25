@@ -11,6 +11,7 @@ import { useUserStore } from '@/store'
 defineOptions({ name: 'login' })
 
 const userStore = useUserStore()
+const router = useRouter()
 
 // 登录
 const loginData = ref<LoginData>({
@@ -18,9 +19,10 @@ const loginData = ref<LoginData>({
   password: '123456'
 })
 
-const handleLogin = async () => {
+async function handleLogin() {
   try {
     await userStore.login(loginData.value)
+    router.push({ name: 'Home' })
   } catch (error) {}
 }
 </script>

@@ -11,7 +11,6 @@ const whiteList = ['/login'] // 路由白名单
 
 router.beforeEach((to, from) => {
   NProgress.start()
-
   // document.title = getPageTitle(to.meta.title)
   const hasToken = getToken()
   if (hasToken) {
@@ -19,6 +18,8 @@ router.beforeEach((to, from) => {
       return '/' // next 可能会出现调用多次的情况 return 则必定不会
     } else {
       // 要判断一下是否有用户信息和路由信息
+      // 判断是否有路由
+      // const hasGetRoutes = store.getters.allRoutes.length !== 0
       return true
     }
   } else {

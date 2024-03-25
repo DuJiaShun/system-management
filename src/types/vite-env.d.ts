@@ -6,7 +6,8 @@ declare module '*.vue' {
 }
 
 declare module 'js-cookie'
-declare module "nprogress";
+declare module 'nprogress'
+declare module 'path-browserify'
 
 interface ImportMetaEnv {
   readonly VITE_APP_BASE_API: string

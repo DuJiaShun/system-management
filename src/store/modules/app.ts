@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 export const useAppStore = defineStore('app', () => {
   // 控制侧边栏
-  const sidebarStatus = useStorage('sidebarStatus', 0)
+  const sidebarStatus = useStorage('sidebarStatus', 1)
   console.log(sidebarStatus)
   const sidebar = reactive({
     opened: true,

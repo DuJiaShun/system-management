@@ -1,8 +1,7 @@
 import { defineStore } from 'pinia'
-import { loginByPwd } from '@/api/user'
+import { loginByPwd, getUserinfo } from '@/api/user'
 import { LoginData } from '@/api/user/type'
 import { setToken } from '@/utils/auth'
-import router from "@/router"
 
 export const useUserStore = defineStore('user', () => {
   // 登录
@@ -12,8 +11,6 @@ export const useUserStore = defineStore('user', () => {
         .then(res => {
           const { accessToken } = res.data
           setToken('', accessToken)
-          ElMessage.success('登录成功')
-          router.push({name: 'Home'})
           resolve()
         })
         .catch(error => {
@@ -21,5 +18,18 @@ export const useUserStore = defineStore('user', () => {
         })
     })
   }
-  return { login }
+
+  function loadUserinfo() {
+    return new Promise<void>((resolve, reject) => {
+      getUserinfo()
+        .then(res => {
+          console.log(res)
+          resolve()
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
+  }
+  return { login, loadUserinfo }
 })
