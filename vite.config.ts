@@ -39,15 +39,18 @@ export default defineConfig((config: ConfigEnv): UserConfig => {
         // 定义全局 SCSS 变量
         scss: {
           javascriptEnabled: true,
-          additionalData: `
-            @use "@/styles/variables.scss" as *;
-          `
+          additionalData: `@use "@/styles/variables.scss" as *;`
         }
       }
     },
     plugins: [
       vue(),
       vueJsx(), // jsx、tsx语法支持
+      viteMockServe({
+        mockPath: './mock', // mock文件存放的位置=
+        enable: true, // 是否启用 mock 功能
+        logger: true // 是否在控制台显示请求日志
+      }),
       AutoImport({
         // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
         imports: ['vue', '@vueuse/core', 'pinia', 'vue-router'],
@@ -80,11 +83,6 @@ export default defineConfig((config: ConfigEnv): UserConfig => {
             }
           ]
         }
-      }),
-      viteMockServe({
-        mockPath: './mock', // mock文件存放的位置
-        enable: true, // 是否启用 mock 功能
-        logger: true // 是否在控制台显示请求日志
       })
     ],
     build: {

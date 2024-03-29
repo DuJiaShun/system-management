@@ -1,7 +1,9 @@
 import { defineStore } from 'pinia'
 import { loginByPwd, getUserinfo } from '@/api/user'
 import { LoginData } from '@/api/user/type'
+import { getToken, removeToken } from '@/utils/auth'
 import { setToken } from '@/utils/auth'
+import { Userinfo } from '@/api/user/type'
 
 export const useUserStore = defineStore('user', () => {
   // 登录
@@ -19,11 +21,13 @@ export const useUserStore = defineStore('user', () => {
     })
   }
 
+  // 获取用户信息
+  let userinfo = ref<Userinfo>()
   function loadUserinfo() {
     return new Promise<void>((resolve, reject) => {
       getUserinfo()
-        .then(res => {
-          console.log(res)
+        .then(({ data }) => {
+          userinfo.value = data
           resolve()
         })
         .catch(error => {
@@ -31,5 +35,13 @@ export const useUserStore = defineStore('user', () => {
         })
     })
   }
-  return { login, loadUserinfo }
+
+  // 删除 token
+  function resetToken() {
+    return new Promise<void>(resolve => {
+      removeToken()
+      resolve()
+    })
+  }
+  return { login, userinfo, loadUserinfo, resetToken }
 })

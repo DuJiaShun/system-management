@@ -4,40 +4,23 @@
   </component>
 </template>
 
-<script>
+<script lang="ts" setup>
 import { isExternal } from '@/utils/validate'
-
-export default {
-  props: {
-    to: {
-      type: String,
-      required: true
-    }
-  },
-  computed: {
-    isExternal() {
-      return isExternal(this.to)
-    },
-    type() {
-      if (this.isExternal) {
-        return 'a'
-      }
-      return 'router-link'
-    }
-  },
-  methods: {
-    linkProps(to) {
-      if (this.isExternal) {
-        return {
-          href: to,
-          target: '_blank',
-          rel: 'noopener'
-        }
-      }
-      return {
-        to: to
-      }
-    }
+defineOptions({ name: 'AppLink' })
+const props = defineProps({
+  to: {
+    type: String,
+    required: true
   }
+})
+
+const external = computed(() => isExternal(props.to))
+
+const type = computed(() => {
+  return external.value ? 'a' : 'router-link'
+})
+
+function linkProps(to: string) {
+  return external.value ? { href: to, target: '_blank', rel: 'noopener' } : { to: to }
 }
 </script>

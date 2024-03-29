@@ -1,11 +1,12 @@
 <template>
-  <div class='home'>
-    22222222
+  <div class=''>
+
   </div>
 </template>
 
 <script lang='ts' setup>
-defineOptions({ name: 'Home' })
+defineOptions({ name: '' })
+
 </script>
 
 <style lang='scss' scoped>

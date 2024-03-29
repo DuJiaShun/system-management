@@ -4,4 +4,6 @@ import { createPinia } from "pinia";
 export const pinia = createPinia();
 
 // 统一导出
-export * from "./modules";
+export * from "./modules/user"
+export * from "./modules/app"
+export * from "./modules/permission"

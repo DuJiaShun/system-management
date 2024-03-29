@@ -13,7 +13,7 @@ const MenuItem = (props: MenuItemProps) => {
     }
   }
   if (title) {
-    vnodes.push(<span v-slot:title>{title}</span>)
+    vnodes.push(<span>{title}</span>)
   }
   return vnodes
 }

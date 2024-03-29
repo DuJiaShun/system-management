@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 import Layout from '@/layout/index.vue'
 
+// 静态路由
 export const constantRoutes = [
   {
     path: '/login',
@@ -9,7 +10,7 @@ export const constantRoutes = [
   },
   {
     path: '/404',
-    component: () => import('@/views/404.vue'),
+    component: () => import('@/views/error/404.vue'),
     meta: { hidden: true }
   },
   {
@@ -18,21 +19,24 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: 'home',
+        path: '/home',
         component: () => import('@/views/home/index.vue'),
         name: 'Home',
-        meta: { title: '主页', icon: 'star', affix: true, keepAlive: true, alwaysShow: false }
+        meta: { title: '主页', icon: 'star', keepAlive: true, alwaysShow: false }
       }
     ]
   },
-  // 兜底路由
+   // 捕获所有路由
   { path: '/:catchAll(.*)', redirect: '/404' }
 ]
-
 const router = createRouter({
   // history: createWebHashHistory(),
   history: createWebHistory(),
   routes: constantRoutes
 })
+
+export function resetRouter() {
+  router.replace({ path: '/login' })
+}
 
 export default router

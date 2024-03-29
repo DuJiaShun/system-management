@@ -1,4 +1,5 @@
 export interface Routes {
+  path: string
   component: string
   redirect?: string
   name?: string
@@ -6,7 +7,7 @@ export interface Routes {
   children?: Routes[]
 }
 
-export interface RouteMeta {
+interface RouteMeta {
   title: string
   icon?: string
   roles: string[]

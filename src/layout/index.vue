@@ -1,5 +1,5 @@
 <template>
-  <div :class="classObj.value" class="app-wrapper">
+  <div :class="classObj" class="app-wrapper">
     <div class="drawer-bg" @click="handleClickOutside" />
     <sidebar class="sidebar-container" />
     <div class="main-container">
