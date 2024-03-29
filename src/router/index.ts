@@ -2,7 +2,7 @@ import { createRouter, createWebHistory, createWebHashHistory, RouteRecordRaw } 
 import Layout from '@/layout/index.vue'
 
 // 静态路由
-export const constantRoutes = [
+export const constantRoutes: RouteRecordRaw[] = [
   {
     path: '/login',
     component: () => import('@/views/login/index.vue'),
@@ -26,7 +26,7 @@ export const constantRoutes = [
       }
     ]
   },
-   // 捕获所有路由
+  // 捕获所有路由
   { path: '/:catchAll(.*)', redirect: '/404' }
 ]
 const router = createRouter({

@@ -11,7 +11,8 @@ const whiteList = ['/login'] // 路由白名单
 
 router.beforeEach(async (to, from) => {
   NProgress.start()
-  document.title = getPageTitle(to.meta.title)
+  // 设置网页标题
+  document.title = getPageTitle(to.meta.title as string)
   const hasToken = getToken()
   if (hasToken) {
     if (to.path === '/login') {
