@@ -1,12 +1,12 @@
 <template>
   <component :is="type" v-bind="linkProps(to)">
-    <slot />
+    <slot></slot>
   </component>
 </template>
 
 <script lang="ts" setup>
 import { isExternal } from '@/utils/validate'
-defineOptions({ name: 'AppLink' })
+defineOptions({ name: 'AppLink', inheritAttrs: false })
 const props = defineProps({
   to: {
     type: String,
@@ -21,6 +21,6 @@ const type = computed(() => {
 })
 
 function linkProps(to: string) {
-  return external.value ? { href: to, target: '_blank', rel: 'noopener' } : { to: to }
+  return external.value ? { href: to, target: '_blank', rel: 'noopener' } : { to }
 }
 </script>

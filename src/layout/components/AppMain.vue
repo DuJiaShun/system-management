@@ -1,10 +1,10 @@
 <template>
   <section class="app-main">
-    <router-view #default="{ Component }">
+    <router-view #default="{ Component, route }">
       <transition name="fade-transform" mode="out-in">
-        <keep-alive>
-          <component :is="Component" />
-        </keep-alive>
+        <!-- <keep-alive :include="cachedViews"> -->
+          <component :is="Component" :key="route.path"/>
+        <!-- </keep-alive> -->
       </transition>
     </router-view>
   </section>
@@ -12,12 +12,7 @@
 
 <script lang="ts" setup>
 defineOptions({ name: 'AppMain' })
-
-const route = useRoute()
-
-const key = computed(() => {
-  return route.path
-})
+// const cachedViews = computed(() => useTagsViewStore().cachedViews)
 </script>
 
 <style lang="scss" scoped>
@@ -28,17 +23,14 @@ const key = computed(() => {
   position: relative;
   overflow: hidden;
 }
-
 .fixed-header + .app-main {
   padding-top: 50px;
 }
-
 .hasTagsView {
   .app-main {
     /* 84 = navbar + tags-view = 50 + 34 */
     min-height: calc(100vh - 84px);
   }
-
   .fixed-header + .app-main {
     padding-top: 84px;
   }

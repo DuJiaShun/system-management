@@ -60,6 +60,7 @@ export default defineConfig((config: ConfigEnv): UserConfig => {
       }),
       Components({
         resolvers: [ElementPlusResolver()],
+
         dirs: ['src/components', 'src/**/components'],
         dts: false
       }),
