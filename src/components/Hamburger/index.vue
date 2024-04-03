@@ -17,7 +17,7 @@
 
 <script lang="ts" setup>
 defineOptions({ name: 'Hamburger' })
-const props = defineProps({
+defineProps({
   isActive: {
     type: Boolean,
     default: false

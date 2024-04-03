@@ -56,13 +56,12 @@ export default defineConfig((config: ConfigEnv): UserConfig => {
         imports: ['vue', '@vueuse/core', 'pinia', 'vue-router'],
         resolvers: [ElementPlusResolver()],
         vueTemplate: true,
-        dts: false
+        dts: 'src/types/auto-imports.d.ts'
       }),
       Components({
         resolvers: [ElementPlusResolver()],
-
         dirs: ['src/components', 'src/**/components'],
-        dts: false
+        dts: 'src/types/components.d.ts'
       }),
       createHtmlPlugin({
         inject: {
