@@ -1,23 +1,33 @@
 import { defineStore } from 'pinia'
 
 export const useAppStore = defineStore('app', () => {
-  // 控制侧边栏
   const sidebarStatus = useStorage('sidebarStatus', 1)
-  console.log(sidebarStatus, 'sidebarStatus')
   const sidebar = reactive({
-    opened: true,
+    opened: sidebarStatus.value.toString() ? !!sidebarStatus.value : true,
     withoutAnimation: false
   })
+  // 控制侧边栏
   function toggleSideBar() {
     sidebar.opened = !sidebar.opened
     sidebar.withoutAnimation = false
-    useStorage('sidebarStatus', 0)
     if (sidebar.opened) {
-      useStorage('sidebarStatus', 1)
+      sidebarStatus.value = 1
     } else {
-      useStorage('sidebarStatus', 0)
+      sidebarStatus.value = 0
     }
   }
+  // 关闭侧边栏
+  function closeSideBar({ withoutAnimation }: { withoutAnimation: boolean }) {
+    sidebarStatus.value = 0
+    sidebar.opened = false
+    sidebar.withoutAnimation = withoutAnimation
+  }
 
-  return { sidebar, toggleSideBar }
+  // 桌面或移动端
+  const device = ref('desktop')
+  function toggleDevice(params: string) {
+    device.value = params
+  }
+
+  return { sidebar, toggleSideBar, closeSideBar, device, toggleDevice }
 })

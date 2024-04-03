@@ -8,6 +8,10 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AppMain: typeof import('./../layout/components/AppMain.vue')['default']
+<<<<<<< HEAD
+=======
+    Breadcrumb: typeof import('./../components/Breadcrumb/index.vue')['default']
+>>>>>>> dev
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElDropdown: typeof import('element-plus/es')['ElDropdown']
@@ -19,6 +23,7 @@ declare module 'vue' {
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     ElSelect: typeof import('element-plus/es')['ElSelect']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
+<<<<<<< HEAD
     Item: typeof import('./../layout/components/Sidebar/Item.vue')['default']
     Link: typeof import('./../layout/components/Sidebar/Link.vue')['default']
     Logo: typeof import('./../layout/components/Sidebar/Logo.vue')['default']
@@ -27,5 +32,19 @@ declare module 'vue' {
     Sidebar: typeof import('./../layout/components/Sidebar/index.vue')['default']
     SidebarItem: typeof import('./../layout/components/Sidebar/SidebarItem.vue')['default']
     SvgIcon: typeof import('./../components/SvgIcon/index.vue')['default']
+=======
+    Hamburger: typeof import('./../components/Hamburger/index.vue')['default']
+    Link: typeof import('./../layout/components/Sidebar/Link.vue')['default']
+    Logo: typeof import('./../layout/components/Sidebar/Logo.vue')['default']
+    Navbar: typeof import('./../layout/components/Navbar/index.vue')['default']
+    RouterLink: typeof import('vue-router')['RouterLink']
+    RouterView: typeof import('vue-router')['RouterView']
+    Search: typeof import('./../layout/components/Navbar/Search.vue')['default']
+    Sidebar: typeof import('./../layout/components/Sidebar/index.vue')['default']
+    SidebarItem: typeof import('./../layout/components/Sidebar/SidebarItem.vue')['default']
+    SidebarItemTitle: typeof import('./../layout/components/Sidebar/SidebarItemTitle.vue')['default']
+    SvgIcon: typeof import('./../components/SvgIcon/index.vue')['default']
+    TagsView: typeof import('./../layout/components/TagsView/index.vue')['default']
+>>>>>>> dev
   }
 }

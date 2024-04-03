@@ -43,7 +43,7 @@ export default [
     component: 'Layout',
     redirect: '/table/complex-table',
     name: 'Table',
-    meta: { title: '表格', icon: 'table' },
+    meta: { title: '表格', icon: 'table', alwaysShow: true  },
     children: [
       {
         path: 'dynamic-table',
