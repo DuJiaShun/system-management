@@ -9,6 +9,8 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 
 const title = defaultSettings.default.title
 
@@ -54,14 +56,30 @@ export default defineConfig((config: ConfigEnv): UserConfig => {
       AutoImport({
         // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
         imports: ['vue', '@vueuse/core', 'pinia', 'vue-router'],
-        resolvers: [ElementPlusResolver()],
+        resolvers: [
+          ElementPlusResolver(),
+          // 自动导入图标组件
+          IconsResolver({
+            prefix: 'Icon'
+          })
+        ],
         vueTemplate: true,
         dts: 'src/types/auto-imports.d.ts'
       }),
       Components({
-        resolvers: [ElementPlusResolver()],
+        resolvers: [
+          ElementPlusResolver(),
+          // 自动注册图标组件
+          IconsResolver({
+            enabledCollections: ['ep']
+          })
+        ],
         dirs: ['src/components', 'src/**/components'],
         dts: 'src/types/components.d.ts'
+      }),
+      Icons({
+        // 自动安装图标
+        autoInstall: true,
       }),
       createHtmlPlugin({
         inject: {

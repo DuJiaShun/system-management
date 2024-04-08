@@ -1,5 +1,3 @@
-import { defineStore } from 'pinia'
-
 export const useAppStore = defineStore('app', () => {
   const sidebarStatus = useStorage('sidebarStatus', 1)
   const sidebar = reactive({

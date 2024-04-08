@@ -16,10 +16,10 @@ import { compile } from 'path-to-regexp'
 const levelList = ref()
 const route = useRoute()
 const router = useRouter()
-// watch(route, newRoute => {
-//   if (newRoute.path.startsWith('/redirect/')) return
-//   getBreadcrumb()
-// })
+watch(route, newRoute => {
+  if (newRoute.path.startsWith('/redirect/')) return
+  getBreadcrumb()
+})
 onBeforeMount(() => {
   getBreadcrumb()
 })
@@ -27,18 +27,18 @@ function getBreadcrumb() {
   // 只显示带有 meta.title 的路由
   let matched: any[] = route.matched.filter(item => item.meta && item.meta.title)
   const first = matched[0]
-  if (!isDashboard(first)) {
-    matched = [{ path: '/dashboard', meta: { title: 'Dashboard' } }].concat(matched)
+  if (!isHomePage(first)) {
+    matched = [{ path: '/home', meta: { title: '主页' } }].concat(matched)
   }
   levelList.value = matched.filter(item => item.meta && item.meta.title && item.meta.breadcrumb !== false)
 }
 
-function isDashboard(route: any) {
+function isHomePage(route: any) {
   const name = route && route.name
   if (!name) {
     return false
   }
-  return name.trim().toLocaleLowerCase() === 'Dashboard'.toLocaleLowerCase()
+  return name.trim().toLocaleLowerCase() === 'Home'.toLocaleLowerCase()
 }
 
 function handleLink(item: any) {
@@ -52,7 +52,7 @@ function handleLink(item: any) {
 
 function pathCompile(path: string) {
   const { params } = route
-  var toPath = compile(path)
+  let toPath = compile(path)
   return toPath(params)
 }
 </script>
@@ -63,7 +63,6 @@ function pathCompile(path: string) {
   font-size: 14px;
   line-height: 50px;
   margin-left: 8px;
-
   .no-redirect {
     color: #97a8be;
     cursor: text;

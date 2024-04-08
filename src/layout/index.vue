@@ -5,7 +5,7 @@
     <div :class="{ hasTagsView: needTagsView }" class="main-container">
       <div :class="{ 'fixed-header': fixedHeader }">
         <navbar />
-        <!-- <tags-view v-if="needTagsView" /> -->
+        <tags-view v-if="needTagsView" />
       </div>
       <app-main />
     </div>
@@ -17,6 +17,7 @@ defineOptions({ name: 'Layout' })
 import AppMain from './components/AppMain.vue'
 import Navbar from './components/Navbar/index.vue'
 import Sidebar from './components/Sidebar/index.vue'
+import TagsView from './components/TagsView/index.vue'
 import { useAppStore, useSetStore } from '@/store'
 const appStore = useAppStore()
 const setStore = useSetStore()
