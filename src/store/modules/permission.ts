@@ -1,4 +1,3 @@
-import { defineStore } from 'pinia'
 import { getRoutesList } from '@/api/menu'
 import Layout from '@/layout/index.vue'
 import router, { constantRoutes } from '@/router'
