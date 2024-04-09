@@ -19,3 +19,12 @@ export function getUserinfo(): AxiosPromise<Userinfo> {
     method: 'get',
   })
 }
+
+
+// 登出
+export function logout() {
+  return request({
+    url: '/sys/logout',
+    method: 'post'
+  })
+}
