@@ -1,7 +1,7 @@
 import { defineConfig, ConfigEnv, UserConfig } from 'vite'
 import { createHtmlPlugin } from 'vite-plugin-html'
 import { viteMockServe } from 'vite-plugin-mock'
-import * as defaultSettings from './src/settings'
+import defaultSettings from './src/settings'
 import { resolve } from 'path'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
@@ -11,12 +11,15 @@ import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
-
-const title = defaultSettings.default.title
+import { version } from './package.json'
+const title = defaultSettings.title
 
 export default defineConfig((config: ConfigEnv): UserConfig => {
   return {
     base: './',
+    define: {
+      __APP_VERSION__: JSON.stringify(version)
+    },
     server: {
       host: '0.0.0.0',
       port: 8000,
@@ -79,7 +82,7 @@ export default defineConfig((config: ConfigEnv): UserConfig => {
       }),
       Icons({
         // 自动安装图标
-        autoInstall: true,
+        autoInstall: true
       }),
       createHtmlPlugin({
         inject: {

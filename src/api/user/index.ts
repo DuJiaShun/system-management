@@ -2,7 +2,6 @@ import request from '@/utils/request'
 import { AxiosPromise } from 'axios'
 import { LoginData, LoginResult, Userinfo } from './type'
 
-
 // 账号密码登录
 export function loginByPwd(data: LoginData): AxiosPromise<LoginResult> {
   return request({
@@ -16,6 +15,14 @@ export function loginByPwd(data: LoginData): AxiosPromise<LoginResult> {
 export function getUserinfo(): AxiosPromise<Userinfo> {
   return request({
     url: '/sys/userinfo',
-    method: 'get',
+    method: 'get'
+  })
+}
+
+// 登出
+export function logoutApi() {
+  return request({
+    url: '/sys/logout',
+    method: 'post'
   })
 }

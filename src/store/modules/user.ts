@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { loginByPwd, getUserinfo } from '@/api/user'
+import { loginByPwd, logoutApi, getUserinfo } from '@/api/user'
 import { LoginData } from '@/api/user/type'
 import { getToken, removeToken } from '@/utils/auth'
 import { setToken } from '@/utils/auth'
@@ -13,6 +13,20 @@ export const useUserStore = defineStore('user', () => {
         .then(res => {
           const { accessToken } = res.data
           setToken('', accessToken)
+          resolve()
+        })
+        .catch(error => {
+          reject(error)
+        })
+    })
+  }
+
+  // 登出
+  function logout() {
+    return new Promise<void>((resolve, reject) => {
+      logoutApi()
+        .then(() => {
+          resetToken()
           resolve()
         })
         .catch(error => {
@@ -43,5 +57,5 @@ export const useUserStore = defineStore('user', () => {
       resolve()
     })
   }
-  return { login, userinfo, loadUserinfo, resetToken }
+  return { login, logout, userinfo, loadUserinfo, resetToken }
 })

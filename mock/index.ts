@@ -16,7 +16,17 @@ export default (config?: MockConfig) => {
         }
       }
     },
-
+    {
+      url: '/sys/logout',
+      method: 'post',
+      response: () => {
+        return {
+          code: 200,
+          message: 'ok',
+          data: {}
+        }
+      }
+    },
     {
       url: '/sys/userinfo',
       method: 'get',
