@@ -44,12 +44,23 @@ import Screenfull from './Screenfull.vue'
 import { useAppStore, useUserStore } from '@/store'
 const appStore = useAppStore()
 const userStore = useUserStore()
+const route = useRoute()
+const router = useRouter()
 // hamburger button
 function toggleClick() {
   appStore.toggleSideBar()
 }
 // 登出
-function logout() {}
+function logout() {
+  ElMessageBox.confirm('确定注销并退出系统吗？', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    type: 'warning',
+    lockScroll: false
+  }).then(() => {
+    userStore.logout().then(() => router.push(`/login?redirect=${route.fullPath}`))
+  })
+}
 </script>
 
 <style lang="scss" scoped>

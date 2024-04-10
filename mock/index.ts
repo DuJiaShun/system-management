@@ -17,6 +17,17 @@ export default (config?: MockConfig) => {
       }
     },
     {
+      url: '/sys/logout',
+      method: 'post',
+      response: () => {
+        return {
+          code: 200,
+          message: 'ok',
+          data: {}
+        }
+      }
+    },
+    {
       url: '/sys/userinfo',
       method: 'get',
       response: () => {
@@ -30,17 +41,6 @@ export default (config?: MockConfig) => {
             avatar: 'https://oss.youlai.tech/youlai-boot/2023/05/16/811270ef31f548af9cffc026dfc3777b.gif',
             roles: ['all']
           }
-        }
-      }
-    },
-    {
-      url: '/sys/logout',
-      method: 'post',
-      response: () => {
-        return {
-          code: 200,
-          message: 'ok',
-          data: {}
         }
       }
     },
