@@ -67,7 +67,8 @@ export default defineConfig((config: ConfigEnv): UserConfig => {
           })
         ],
         vueTemplate: true,
-        dts: 'src/types/auto-imports.d.ts'
+        // dts: 'src/types/auto-imports.d.ts'
+        dts: false
       }),
       Components({
         resolvers: [
@@ -78,7 +79,8 @@ export default defineConfig((config: ConfigEnv): UserConfig => {
           })
         ],
         dirs: ['src/components', 'src/**/components'],
-        dts: 'src/types/components.d.ts'
+        // dts: 'src/types/components.d.ts'
+        dts: false
       }),
       Icons({
         // 自动安装图标

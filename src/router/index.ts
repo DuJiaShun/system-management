@@ -22,7 +22,7 @@ export const constantRoutes: RouteRecordRaw[] = [
         path: '/home',
         component: () => import('@/views/home/index.vue'),
         name: 'Home',
-        meta: { title: '主页', icon: 'star', affix: true, keepAlive: true, alwaysShow: false }
+        meta: { title: '工作台', icon: 'work-table', affix: true, keepAlive: true, alwaysShow: false }
       }
     ]
   },
