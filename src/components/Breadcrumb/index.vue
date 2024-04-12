@@ -26,19 +26,7 @@ onBeforeMount(() => {
 function getBreadcrumb() {
   // 只显示带有 meta.title 的路由
   let matched: any[] = route.matched.filter(item => item.meta && item.meta.title)
-  const first = matched[0]
-  if (!isHomePage(first)) {
-    matched = [{ path: '/home', meta: { title: '主页' } }].concat(matched)
-  }
   levelList.value = matched.filter(item => item.meta && item.meta.title && item.meta.breadcrumb !== false)
-}
-
-function isHomePage(route: any) {
-  const name = route && route.name
-  if (!name) {
-    return false
-  }
-  return name.trim().toLocaleLowerCase() === 'Home'.toLocaleLowerCase()
 }
 
 function handleLink(item: any) {
