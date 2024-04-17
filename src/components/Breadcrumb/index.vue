@@ -12,6 +12,7 @@
 </template>
 
 <script lang="ts" setup>
+defineOptions({ name: 'Breadcrumb' })
 import { compile } from 'path-to-regexp'
 const levelList = ref()
 const route = useRoute()

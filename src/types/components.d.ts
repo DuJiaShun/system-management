@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     AppMain: typeof import('./../layout/components/AppMain.vue')['default']
     Breadcrumb: typeof import('./../components/Breadcrumb/index.vue')['default']
+    CardDrag: typeof import('./../components/CardDrag/index.vue')['default']
     ElBreadcrumb: typeof import('element-plus/es')['ElBreadcrumb']
     ElBreadcrumbItem: typeof import('element-plus/es')['ElBreadcrumbItem']
     ElDropdown: typeof import('element-plus/es')['ElDropdown']
@@ -34,5 +35,8 @@ declare module 'vue' {
     SidebarItemTitle: typeof import('./../layout/components/Sidebar/SidebarItemTitle.vue')['default']
     SvgIcon: typeof import('./../components/SvgIcon/index.vue')['default']
     TagsView: typeof import('./../layout/components/TagsView/index.vue')['default']
+  }
+  export interface ComponentCustomProperties {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

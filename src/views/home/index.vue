@@ -6,7 +6,9 @@
       <div v-else @click="editData">编辑</div>
     </div>
     <div class="card-container">
-      
+      <card-drag :data="cardList"></card-drag>
+      <div v-if="!isEdit"></div>
+      <div v-else></div>
     </div>
   </div>
 </template>
@@ -15,6 +17,26 @@
 defineOptions({ name: 'Home' })
 const loading = ref(false)
 const isEdit = ref(false)
+const cardList = reactive([
+  {
+    positionNum: 1,
+    name: '最近访问',
+    id: 'RecentlyVisited',
+    path: ''
+  },
+  {
+    positionNum: 2,
+    name: '业务指令',
+    id: 'ToDo',
+    path: '/command/workplan'
+  },
+  {
+    positionNum: 3,
+    name: '通知公告',
+    id: 'Announcement',
+    path: '/dxf/infoGather/notice'
+  }
+])
 function saveData() {}
 function editData() {}
 </script>
