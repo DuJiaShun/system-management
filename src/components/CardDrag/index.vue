@@ -8,7 +8,7 @@
   >
     <div
       class="d_cardBorderBox"
-      v-for="item of data"
+      v-for="item in data"
       :key="item.id"
       :id="item.id"
       :style="{
@@ -26,8 +26,7 @@
         <div @mousedown="touchStart($event, item.id)" class="d_topWrapBox">
           <slot name="header" v-bind:item="item">
             <div class="d_topMenuBox">
-              <div class="d_menuTitle" v-if="item.name">{{ item.name }}</div>
-              <div class="d_menuTitle" v-else>默认标题</div>
+              <div class="d_menuTitle">{{ item.name }}</div>
             </div>
           </slot>
         </div>
@@ -41,7 +40,7 @@
 </template>
 
 <script lang="ts" setup>
-defineOptions({ name: 'CardDrag' })
+defineOptions({ name: 'CardDrag1' })
 const props = defineProps({
   data: {
     type: Array,
@@ -51,7 +50,7 @@ const props = defineProps({
   },
   colNum: {
     type: Number,
-    default: 2
+    default: 3
   },
   cardOutsideWidth: {
     type: Number,
@@ -190,7 +189,6 @@ function touchStart(event, selectId) {
       }
 
       for (let item of changeArray) {
-        //vue的$set使更改数据的同时实时刷新样式
         item.positionNum = item.positionNum - 1
         document.querySelector('#' + item.id).style.top = computeTop(item.positionNum) + 'px'
         document.querySelector('#' + item.id).style.left = computeLeft(item.positionNum) + 'px'
