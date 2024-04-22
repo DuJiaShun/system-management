@@ -59,6 +59,7 @@ function cardPositionLeft(index: number) {
 let dragDom: HTMLElement
 // 拖动的dom元素对应的数据
 let dragDomData: dataType | undefined
+let dragDomIndex: number
 // dom元素起始点
 let domStartY: number
 let domStartX: number
@@ -83,6 +84,10 @@ function dragStart(e: MouseEvent, id: string) {
   dragDom = card
   // 获取拖动dom元素的数据
   dragDomData = props.data.find(item => {
+    return item.id === id
+  })
+  // 获取拖动dom元素的下标
+  dragDomIndex = props.data.findIndex(item => {
     return item.id === id
   })
 
@@ -117,40 +122,55 @@ function dragMove(e: MouseEvent) {
 
   // 节流
   throttleFn = setTimeout(() => {
-    // 找到被当前拖动的dom元素遮盖的元素
-    coveredDom(parseInt(dragDom.style.top), parseInt(dragDom.style.left))
+    findCoveredDom(parseInt(dragDom.style.top), parseInt(dragDom.style.left))
     clearTimeout(throttleFn)
   }, 400)
 }
 
-// 父元素
-const cardDrag = ref()
-function coveredDom(domY: number, domX: number) {
-  // 遍历子元素
-  let domList = cardDrag.value.children
-  console.log(domList);
-
-  for (const item of domList) {
-    console.log(key);
-    const relativeY = domY - parseInt(domList[key].style.top)
-    const relativeX = domX - parseInt(domList[key].style.left)
-    if (
-      Math.abs(relativeY) < props.height / 2 &&
-      Math.abs(relativeX) < props.width / 2 &&
-      dragDomData &&
-      domList[key].id !== dragDomData.id
-    ) {
-      if (relativeX > 0) {
-        console.log(domList[key].id, 111)
-        break
-      }
-      if (relativeX < 0) {
-        console.log(domList[+key - 1], 111)
-        break
-      }
-    }
-  }
+// 找到被当前拖动的dom元素遮盖的元素
+function findCoveredDom(domY: number, domX: number) {
+  // 计算当前移动卡片，可以覆盖的号码位置
+  let relativeY = domY / (props.height + props.rowSpace)
+  let relativeX = domX / (props.width + props.columnSpace) + 1
+  console.log(relativeY, relativeX)
 }
+
+// // 父元素
+// const cardDrag = ref()
+// // 找到被覆盖的元素
+// function findCoveredDom(domY: number, domX: number) {
+//   // 遍历子元素
+//   let domList: HTMLElement[] = Array.from(cardDrag.value.children)
+//   for (const [index, item] of domList.entries()) {
+//     const relativeY = domY - parseInt(item.style.top)
+//     const relativeX = domX - parseInt(item.style.left)
+//     if (
+//       Math.abs(relativeY) < props.height / 2 &&
+//       Math.abs(relativeX) < props.width / 2 &&
+//       dragDomData &&
+//       item.id !== dragDomData.id
+//     ) {
+//       // 找到被覆盖dom元素的数据
+//       const covered = props.data.find(dataItem => {
+//         return item.id === dataItem.id
+//       })
+//       if (covered) {
+//         const bigSmall =  dragDomData.index > covered.index
+
+//       }
+//       // 插入当前被覆盖的dom元素后
+//       if (relativeX > 0) {
+//         // console.log(item, index, dragDomIndex, 111)
+//         break
+//       }
+//       // 插入当前被覆盖的dom元素前
+//       if (relativeX < 0) {
+//         // console.log(item, index, dragDomIndex, 2222)
+//         break
+//       }
+//     }
+//   }
+// }
 
 // 鼠标抬起拖动结束
 function dragStop() {
